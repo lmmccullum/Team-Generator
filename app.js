@@ -10,124 +10,179 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+const team = []
 
 // Employee
 
 inquirer
   .prompt([
     {
-      type: 'input',
-      message: 'What is your user name?',
-      name: 'username',
+      type: 'list',
+      message: 'What team member would you like to add?',
+      name: 'members',
+      choices: ["Employee", "Engineer", "Intern", "Manager", "Quit"]
     },
-    {
-      type: 'input',
-      message: 'What is your id?',
-      name: 'id',
-    },
-    {
-      type: 'input',
-      message: 'What is your email?',
-      name: 'email',
-    },
-  ])
-  .then((response) =>
-    new Employee(response.username, response.id, response.email)
-     
-  );
+  ]).then((response) => {
+    if (response.members === "Quit") {
+      render(team)
+    }
+    if (response.members === "Employee") {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            message: 'What is your user name?',
+            name: 'username',
+          },
+          {
+            type: 'input',
+            message: 'What is your id?',
+            name: 'id',
+          },
+          {
+            type: 'input',
+            message: 'What is your email?',
+            name: 'email',
+          },
+        ])
+        .then((response) => {
+          let newEmployee = new Employee(response.username, response.id, response.email);
+          team.push(newEmployee);
+
+        }
+        );
+    }
+  });
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
+
 
 //  Engineer
 
-  inquirer
+inquirer
   .prompt([
     {
-      type: 'input',
-      message: 'What is your user name?',
-      name: 'username',
+      type: 'list',
+      message: 'What team member would you like to add?',
+      name: 'members',
+      choices: ["Employee", "Engineer", "Intern", "Manager"]
     },
-    {
-      type: 'input',
-      message: 'What is your id?',
-      name: 'id',
-    },
-    {
-      type: 'input',
-      message: 'What is your email?',
-      name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'What is your GitHub username?',
-        name: 'github',
-    },
-  ])
-  .then((response) =>
-    new Engineer(response.username, response.id, response.email, response.github)
-     
-  );
+  ]).then((response) => {
+    if (response.members === "Engineer") {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            message: 'What is your user name?',
+            name: 'username',
+          },
+          {
+            type: 'input',
+            message: 'What is your id?',
+            name: 'id',
+          },
+          {
+            type: 'input',
+            message: 'What is your email?',
+            name: 'email',
+          },
+          {
+            type: 'input',
+            message: 'What is your GitHub username?',
+            name: 'github',
+          },
+        ])
+        .then((response) => {
+          let newEngineer = new Engineer(response.username, response.id, response.email, response.github);
+          team.push(newEngineer);
+        });
+    }
 
+    // Intern
 
-  inquirer
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          message: 'What team member would you like to add?',
+          name: 'members',
+          choices: ["Employee", "Engineer", "Intern", "Manager"]
+        },
+      ]).then((response) => {
+        if (response.members === "Intern") {
+          inquirer
+            .prompt([
+              {
+                type: 'input',
+                message: 'What is your user name?',
+                name: 'username',
+              },
+              {
+                type: 'input',
+                message: 'What is your id?',
+                name: 'id',
+              },
+              {
+                type: 'input',
+                message: 'What is your email?',
+                name: 'email',
+              },
+              {
+                type: 'input',
+                message: 'What is the name of your school?',
+                name: 'school',
+              },
+            ])
+            .then((response) => {
+              let newIntern = new Intern(response.username, response.id, response.email, response.school);
+              team.push(newIntern);
+        });
+  }
+
+// Manager
+
+inquirer
   .prompt([
     {
-      type: 'input',
-      message: 'What is your user name?',
-      name: 'username',
+      type: 'list',
+      message: 'What team member would you like to add?',
+      name: 'members',
+      choices: ["Employee", "Engineer", "Intern", "Manager"]
     },
-    {
-      type: 'input',
-      message: 'What is your id?',
-      name: 'id',
-    },
-    {
-      type: 'input',
-      message: 'What is your email?',
-      name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'What is the name of your school?',
-        name: 'school',
-    },
-  ])
-  .then((response) =>
-    new Intern(response.username, response.id, response.email, response.school)
-     
-  );
+  ]).then((response) => {
+    if (response.members === "Manager") {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            message: 'What is your user name?',
+            name: 'username',
+          },
+          {
+            type: 'input',
+            message: 'What is your id?',
+            name: 'id',
+          },
+          {
+            type: 'input',
+            message: 'What is your email?',
+            name: 'email',
+          },
+          {
+            type: 'input',
+            message: 'What is your officeNumber?',
+            name: 'officeNumber',
+          },
+        ])
+        .then((response) => {
+          let newManager = new Manager(response.username, response.id, response.email, response.officeNumber);
+    team.push(newManager);
+    });
+    }
 
 
-  inquirer
-  .prompt([
-    {
-      type: 'input',
-      message: 'What is your user name?',
-      name: 'username',
-    },
-    {
-      type: 'input',
-      message: 'What is your id?',
-      name: 'id',
-    },
-    {
-      type: 'input',
-      message: 'What is your email?',
-      name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'What is your officeNumber?',
-        name: 'officeNumber',
-    },
-  ])
-  .then((response) =>
-    new Manager(response.username, response.id, response.email, response.officeNumber)
-     
-  );
-
-
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
