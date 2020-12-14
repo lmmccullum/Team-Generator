@@ -53,9 +53,6 @@ inquirer
         );
     }
   });
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
 
 //  Engineer
 
@@ -179,6 +176,16 @@ inquirer
     team.push(newManager);
     });
     }
+
+    function init() {
+      inq.prompt(team).then((data) => {
+          console.log(data)
+      fs.writeFile('team.html')
+   });
+  }
+
+init();
+
 
 
 // Write code to use inquirer to gather information about the development team members,
