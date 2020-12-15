@@ -13,178 +13,173 @@ const render = require("./lib/htmlRenderer");
 const team = []
 
 // Employee
+const whatToDo = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        message: 'What team member would you like to add?',
+        name: 'members',
+        choices: ["Engineer", "Intern", "Quit"]
+      },
+    ]).then(({ members }) => {
+      if (members === "Quit") {
+        console.log(team)
+        const output = render(team)
+        console.log(output)
+        fs.writeFile(outputPath,output, function (err) {
+          if (err) throw err;
+          console.log('File Was Created');
+        });
+        // fs.writeFile(outputPath, render(team),(err)=>{
+        //   if(err) throw err;
+        //   console.log("team created")
+        //   return
+        // })
+      }
+      else if (members === "Engineer") {
+        makeEngineer()
+      }
+      else if (members === "Intern") {
+        makeIntern()
+      }
 
-inquirer
-  .prompt([
-    {
-      type: 'list',
-      message: 'What team member would you like to add?',
-      name: 'members',
-      choices: ["Employee", "Engineer", "Intern", "Manager", "Quit"]
-    },
-  ]).then((response) => {
-    if (response.members === "Quit") {
-      render(team)
-    }
-    if (response.members === "Employee") {
-      inquirer
-        .prompt([
-          {
-            type: 'input',
-            message: 'What is your user name?',
-            name: 'username',
-          },
-          {
-            type: 'input',
-            message: 'What is your id?',
-            name: 'id',
-          },
-          {
-            type: 'input',
-            message: 'What is your email?',
-            name: 'email',
-          },
-        ])
-        .then((response) => {
-          let newEmployee = new Employee(response.username, response.id, response.email);
-          team.push(newEmployee);
+    })
+}
+//   inquirer
+//     .prompt([
+//       {
+//         type: 'input',
+//         message: 'What is your user name?',
+//         name: 'username',
+//       },
+//       {
+//         type: 'input',
+//         message: 'What is your id?',
+//         name: 'id',
+//       },
+//       {
+//         type: 'input',
+//         message: 'What is your email?',
+//         name: 'email',
+//       },
+//     ])
+//     .then((response) => {
+//       let newEmployee = new Employee(response.username, response.id, response.email);
+//       team.push(newEmployee);
 
-        }
-        );
-    }
-  });
+//     }
+//     );
+//   }
+// });
+
 
 //  Engineer
+const makeEngineer = () => {
 
-inquirer
-  .prompt([
-    {
-      type: 'list',
-      message: 'What team member would you like to add?',
-      name: 'members',
-      choices: ["Employee", "Engineer", "Intern", "Manager"]
-    },
-  ]).then((response) => {
-    if (response.members === "Engineer") {
-      inquirer
-        .prompt([
-          {
-            type: 'input',
-            message: 'What is your user name?',
-            name: 'username',
-          },
-          {
-            type: 'input',
-            message: 'What is your id?',
-            name: 'id',
-          },
-          {
-            type: 'input',
-            message: 'What is your email?',
-            name: 'email',
-          },
-          {
-            type: 'input',
-            message: 'What is your GitHub username?',
-            name: 'github',
-          },
-        ])
-        .then((response) => {
-          let newEngineer = new Engineer(response.username, response.id, response.email, response.github);
-          team.push(newEngineer);
-        });
-    }
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'What is your user name?',
+        name: 'username',
+      },
+      {
+        type: 'input',
+        message: 'What is your id?',
+        name: 'id',
+      },
+      {
+        type: 'input',
+        message: 'What is your email?',
+        name: 'email',
+      },
+      {
+        type: 'input',
+        message: 'What is your GitHub username?',
+        name: 'github',
+      },
+    ])
+    .then((response) => {
+      let newEngineer = new Engineer(response.username, response.id, response.email, response.github);
+      team.push(newEngineer);
+      whatToDo()
+    });
+}
 
-    // Intern
-
-    inquirer
-      .prompt([
-        {
-          type: 'list',
-          message: 'What team member would you like to add?',
-          name: 'members',
-          choices: ["Employee", "Engineer", "Intern", "Manager"]
-        },
-      ]).then((response) => {
-        if (response.members === "Intern") {
-          inquirer
-            .prompt([
-              {
-                type: 'input',
-                message: 'What is your user name?',
-                name: 'username',
-              },
-              {
-                type: 'input',
-                message: 'What is your id?',
-                name: 'id',
-              },
-              {
-                type: 'input',
-                message: 'What is your email?',
-                name: 'email',
-              },
-              {
-                type: 'input',
-                message: 'What is the name of your school?',
-                name: 'school',
-              },
-            ])
-            .then((response) => {
-              let newIntern = new Intern(response.username, response.id, response.email, response.school);
-              team.push(newIntern);
-        });
-  }
+// Intern
+const makeIntern = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'What is your user name?',
+        name: 'username',
+      },
+      {
+        type: 'input',
+        message: 'What is your id?',
+        name: 'id',
+      },
+      {
+        type: 'input',
+        message: 'What is your email?',
+        name: 'email',
+      },
+      {
+        type: 'input',
+        message: 'What is the name of your school?',
+        name: 'school',
+      },
+    ])
+    .then((response) => {
+      let newIntern = new Intern(response.username, response.id, response.email, response.school);
+      team.push(newIntern);
+      whatToDo()
+    });
+}
 
 // Manager
+const makeManager = () => {
 
-inquirer
-  .prompt([
-    {
-      type: 'list',
-      message: 'What team member would you like to add?',
-      name: 'members',
-      choices: ["Employee", "Engineer", "Intern", "Manager"]
-    },
-  ]).then((response) => {
-    if (response.members === "Manager") {
-      inquirer
-        .prompt([
-          {
-            type: 'input',
-            message: 'What is your user name?',
-            name: 'username',
-          },
-          {
-            type: 'input',
-            message: 'What is your id?',
-            name: 'id',
-          },
-          {
-            type: 'input',
-            message: 'What is your email?',
-            name: 'email',
-          },
-          {
-            type: 'input',
-            message: 'What is your officeNumber?',
-            name: 'officeNumber',
-          },
-        ])
-        .then((response) => {
-          let newManager = new Manager(response.username, response.id, response.email, response.officeNumber);
-    team.push(newManager);
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: 'What is the managers name?',
+        name: 'username',
+      },
+      {
+        type: 'input',
+        message: 'What is your id?',
+        name: 'id',
+      },
+      {
+        type: 'input',
+        message: 'What is your email?',
+        name: 'email',
+      },
+      {
+        type: 'input',
+        message: 'What is your officeNumber?',
+        name: 'officeNumber',
+      },
+    ])
+    .then((response) => {
+      let newManager = new Manager(response.username, response.id, response.email, response.officeNumber);
+      team.push(newManager);
+      whatToDo()
     });
-    }
+}
+ makeManager()
+// function init() {
+//   inq.prompt(team).then((response) => {
+//     console.log(response)
+//     fs.writeFile('team.html')
+//   });
+// }
 
-    function init() {
-      inq.prompt(team).then((data) => {
-          console.log(data)
-      fs.writeFile('team.html')
-   });
-  }
-
-init();
+// init();
 
 
 
