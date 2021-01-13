@@ -31,7 +31,7 @@
 ## WALKTHROUGH VIDEO
 • The included image demonstrates the application functionality:
 
-[![Demonstrative Video](demo.mp4)]
+![Demonstrative Video](TeamGenerator_ScreenCapture)
 
 ## QUESTIONS
 • If you have any questions, concerns or suggestions please feel free to contact me with the link below.
