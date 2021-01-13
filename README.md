@@ -31,7 +31,7 @@
 ## WALKTHROUGH VIDEO
 • The included image demonstrates the application functionality:
 
-[![Demonstrative Video]()]
+[![Demonstrative Video](Untitled_ Jan 12, 2021 7_52 PM.mp4)]
 
 ## QUESTIONS
 • If you have any questions, concerns or suggestions please feel free to contact me with the link below.
