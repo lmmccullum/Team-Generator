@@ -8,7 +8,8 @@
   4. [Instructions For Use](#InstructionsForUse)
   5. [License](#License)
   6. [Walkthrough Video](#WalkthroughVideo)
-  7. [Questions](#Questions)
+  7. [Screenshot](#Screenshot)
+  8. [Questions](#Questions)
 
 ## DESCRIPTION
 • This is a software engineering team generator command line interface (CLI) application that creates a well, structured file based on user inputs.  
@@ -32,6 +33,10 @@
 • The included image demonstrates the application functionality:
 
 ![Demonstrative Video](TeamGenerator_ScreenCapture.gif)
+
+## SCREENSHOT
+
+![Demonstrative Video](https://i.imgur.com/NNDbNcQ.png)
 
 ## QUESTIONS
 • If you have any questions, concerns or suggestions please feel free to contact me with the link below.
